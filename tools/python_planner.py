@@ -321,7 +321,7 @@ def main():
                 session, frame, obstacles = validate_request(message)
             except (ValueError, OverflowError) as exc:
                 print("[PROTOCOL]", exc, flush=True)
-            continue
+                continue
 
             if session != last_session:
                 last_offset = 0.0
@@ -353,14 +353,14 @@ def main():
 
             response = {
                 "type": "CONTROL",
-                "steer_offset": best_offset
+                "steer_offset": best_offset,
                 "protocol_version": 1,
                 "session_id": session,
                 "frame_id": frame,
             }
 
 
-            response_data = json.dumps(response, allow_nan=False)(response) + "\n"
+            response_data = json.dumps(response, allow_nan=False) + "\n"
 
             client.sendall(response_data.encode("utf-8"))
 

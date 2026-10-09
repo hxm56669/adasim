@@ -56,3 +56,6 @@ Thumbs.db
 
 # 运行时产出
 record/
+# Python cache
+__pycache__/
+*.py[cod]

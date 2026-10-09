@@ -652,5 +652,12 @@ void SimulationEngine::pause()
 
 void SimulationEngine::onLateralControlReceived(double offset)
 {
-    planStartOffset_ = offset;
+    // 目标没有变化，不重复启动规划
+    if (std::abs(offset - targetLateralOffset_) < 1e-3)
+    {
+        return;
+    }
+
+    // 启动横向规划
+    startLateralPlan(offset);
 }
